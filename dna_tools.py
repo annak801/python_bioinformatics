@@ -1,4 +1,4 @@
-def reverse_complement (sequence):
+def reverse_complement(sequence):
     new_string = ""
     sequence = sequence.upper()
     for base in sequence:
@@ -24,30 +24,6 @@ def gc_content(sequence):
     return round(gc_percentage, 2)
 
 
-seq1 = "ATGGCC"
-seq2 = "AATTAA"
-seq3 = "GGGCCC"
-
-dna_sequence = "ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGA"
-print(gc_content(dna_sequence))
-
-for seq in [seq1, seq2, seq3]:
-    print(f"{len(seq)}\t{gc_content(seq):.2f}")
-
-
-sequences = ["AATT", "GCCAATGC", "GATTTTCAGC", "GGGCCCCCCAAAAAT"]
-print(sequences)
-sequences[0]
-sequences[3]
-len(sequences)
-
-
-results = []
-
-for sequence in sequences:
-    results.append(gc_content(sequence))
-
-
 
 def base_composition(sequence):
     base_counts = {}
@@ -59,3 +35,16 @@ def base_composition(sequence):
     return base_counts
 
 
+def get_gene_name(header):
+    piece = header.split("[gene=")[1]
+    name = piece.split("]")[0]
+    return name
+
+
+def read_gene_list (filename):
+    gene_set = set()
+    with open (filename) as f:
+        for line in f:
+            line = line.strip()
+            gene_set.add(line)
+    return gene_set
