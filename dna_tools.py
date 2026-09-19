@@ -36,8 +36,11 @@ def base_composition(sequence):
 
 
 def get_gene_name(header):
-    piece = header.split("[gene=")[1]
-    name = piece.split("]")[0]
+    if "[gene=" in header:
+        piece = header.split("[gene=")[1]
+        name = piece.split("]")[0]
+    else:
+        name = header.strip()
     return name
 
 
