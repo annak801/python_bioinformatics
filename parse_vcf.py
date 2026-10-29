@@ -30,7 +30,12 @@ with open (sys.argv[1]) as f, open (sys.argv[2], "w") as out:
         else:
             data = line.strip().split("\t")
             list_data.append(data)
-            list_qual.append(float(data[qual_pos]))
+            try:
+                qual = float(data[qual_pos])
+                list_qual.append(qual)
+            except ValueError:
+                 qual = None
+                 list_qual.append(qual)
             info = {}
             for item in data[info_pos].split(";"):
                 if "=" in item:
@@ -39,8 +44,12 @@ with open (sys.argv[1]) as f, open (sys.argv[2], "w") as out:
                 else:
                     info[item] = True
             if "AF" in info:
-                        af = info["AF"].split(",")[0]
-                        list_af.append(float(af))
+                        try:
+                            af = info["AF"].split(",")[0]
+                            list_af.append(float(af))
+                        except ValueError:
+                            af = None
+                            list_af.append(af)
             else:
                  af = "NA"
             ref=data[ref_pos]
